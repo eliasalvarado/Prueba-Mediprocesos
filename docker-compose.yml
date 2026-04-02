@@ -1,0 +1,58 @@
+services:
+  # SQL Server Database
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: prueba-mediprocesos-sqlserver
+    environment:
+      ACCEPT_EULA: ${ACCEPT_EULA:-Y}
+      SA_PASSWORD: ${SQL_SA_PASSWORD:-MyPassword123!}
+      MSSQL_PID: ${MSSQL_PID:-Developer}
+    ports:
+      - "${SQL_PORT:-1433}:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - mediprocesos-network
+
+  # Spring Boot Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: prueba-mediprocesos-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://sqlserver:1433;databaseName=${SQL_DATABASE:-master};encrypt=true;trustServerCertificate=true
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: ${SQL_SA_PASSWORD:-MyPassword123!}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SERVER_PORT: 8080
+    ports:
+      - "${BACKEND_PORT:-3000}:8080"
+    depends_on:
+      - sqlserver
+    networks:
+      - mediprocesos-network
+    restart: unless-stopped
+    command: sh -c "sleep 30 && java -jar app.jar"
+
+  # Angular Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: prueba-mediprocesos-frontend
+    environment:
+      API_URL: http://localhost:${BACKEND_PORT:-3000}
+    ports:
+      - "${FRONTEND_PORT:-8080}:4200"
+    depends_on:
+      - backend
+    networks:
+      - mediprocesos-network
+
+volumes:
+  sqlserver_data:
+
+networks:
+  mediprocesos-network:
+    driver: bridge
