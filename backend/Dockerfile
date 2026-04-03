@@ -13,7 +13,7 @@ COPY .mvn .mvn
 COPY src ./src
 
 # Build the application
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw clean package -Dmaven.test.skip=true
 
 # Runtime stage
 FROM eclipse-temurin:21-jre-alpine

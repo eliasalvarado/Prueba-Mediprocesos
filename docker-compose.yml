@@ -11,8 +11,10 @@ services:
       - "${SQL_PORT:-1433}:1433"
     volumes:
       - sqlserver_data:/var/opt/mssql
+      - ./database/init.sql:/var/opt/mssql/init.sql
     networks:
       - mediprocesos-network
+    command: /bin/bash -c "/opt/mssql/bin/sqlservr & sleep 20 && /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P ${SQL_SA_PASSWORD:-MyPassword123!} -C -i /var/opt/mssql/init.sql && wait"
 
   # Spring Boot Backend
   backend:
@@ -21,11 +23,13 @@ services:
       dockerfile: Dockerfile
     container_name: prueba-mediprocesos-backend
     environment:
-      SPRING_DATASOURCE_URL: jdbc:sqlserver://sqlserver:1433;databaseName=${SQL_DATABASE:-master};encrypt=true;trustServerCertificate=true
-      SPRING_DATASOURCE_USERNAME: sa
-      SPRING_DATASOURCE_PASSWORD: ${SQL_SA_PASSWORD:-MyPassword123!}
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SERVER_PORT: 8080
+      DB_HOST: sqlserver
+      DB_PORT: 1433
+      DB_NAME: ${SQL_DATABASE:-master}
+      DB_USERNAME: sa
+      DB_PASSWORD: ${SQL_SA_PASSWORD:-MyPassword123!}
+      JWT_SECRET: ${JWT_SECRET:-defaultSecretKeyForDevelopmentOnlyChangeInProductionWithAtLeast32CharsFS}
+      JWT_EXPIRATION: ${JWT_EXPIRATION:-86400000}
     ports:
       - "${BACKEND_PORT:-3000}:8080"
     depends_on:
@@ -33,7 +37,7 @@ services:
     networks:
       - mediprocesos-network
     restart: unless-stopped
-    command: sh -c "sleep 30 && java -jar app.jar"
+    command: sh -c "sleep 40 && java -jar app.jar"
 
   # Angular Frontend
   frontend:

@@ -1,3 +1,37 @@
 spring:
   application:
     name: backend
+  
+  # Database Configuration
+  datasource:
+    url: jdbc:sqlserver://${DB_HOST:sqlserver}:${DB_PORT:1433};encrypt=true;trustServerCertificate=true
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:MyPassword123!}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  
+  # JPA/Hibernate Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+# Server Configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:defaultSecretKeyForDevelopmentOnlyChangeInProductionWithAtLeast32CharsFS}
+  expiration: ${JWT_EXPIRATION:86400000}
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.mediprocesos: DEBUG
+
