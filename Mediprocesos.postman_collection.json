@@ -1,0 +1,252 @@
+{
+  "info": {
+    "_postman_id": "fa9be739-ce5c-4530-87fa-ff8cd75521b9",
+    "name": "Mediprocesos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27025091"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInJvbCI6IkFETUlOIiwiaWF0IjoxNzc1MTgwMjIxLCJleHAiOjE3NzUyNjY2MjF9.2i9uoH1h7EgUSGM6QvTi_jmrNVFyC1JVLpugaIe1QNpNDAUB--aWcmfrdseRUWgH60AnXEFAU73eadnc-JD9ZQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/auth/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "empleados",
+      "item": [
+        {
+          "name": "empleados",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInJvbCI6IkFETUlOIiwiaWF0IjoxNzc1MTgwMjIxLCJleHAiOjE3NzUyNjY2MjF9.2i9uoH1h7EgUSGM6QvTi_jmrNVFyC1JVLpugaIe1QNpNDAUB--aWcmfrdseRUWgH60AnXEFAU73eadnc-JD9ZQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/empleados",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "empleados"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "crear empleado",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInJvbCI6IkFETUlOIiwiaWF0IjoxNzc1MTgwMjIxLCJleHAiOjE3NzUyNjY2MjF9.2i9uoH1h7EgUSGM6QvTi_jmrNVFyC1JVLpugaIe1QNpNDAUB--aWcmfrdseRUWgH60AnXEFAU73eadnc-JD9ZQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"Carlos\",\r\n  \"apellidos\": \"Rodríguez López\",\r\n  \"numeroIdentificacion\": \"87654321\",\r\n  \"fechaNacimiento\": \"1995-06-20\",\r\n  \"genero\": \"M\",\r\n  \"username\": \"crodriguez\",\r\n  \"password\": \"Password123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/empleados",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "empleados"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "empleado por id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInJvbCI6IkFETUlOIiwiaWF0IjoxNzc1MTgwMjIxLCJleHAiOjE3NzUyNjY2MjF9.2i9uoH1h7EgUSGM6QvTi_jmrNVFyC1JVLpugaIe1QNpNDAUB--aWcmfrdseRUWgH60AnXEFAU73eadnc-JD9ZQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/empleados/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "empleados",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "eliminar empleado",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInJvbCI6IkFETUlOIiwiaWF0IjoxNzc1MTgwMjIxLCJleHAiOjE3NzUyNjY2MjF9.2i9uoH1h7EgUSGM6QvTi_jmrNVFyC1JVLpugaIe1QNpNDAUB--aWcmfrdseRUWgH60AnXEFAU73eadnc-JD9ZQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/empleados/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "empleados",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "actualizar empleado",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInJvbCI6IkFETUlOIiwiaWF0IjoxNzc1MTgwMjIxLCJleHAiOjE3NzUyNjY2MjF9.2i9uoH1h7EgUSGM6QvTi_jmrNVFyC1JVLpugaIe1QNpNDAUB--aWcmfrdseRUWgH60AnXEFAU73eadnc-JD9ZQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"Juan\",\r\n  \"apellidos\": \"Pérez García Actualizado\",\r\n  \"numeroIdentificacion\": \"12345678\",\r\n  \"fechaNacimiento\": \"1990-01-15\",\r\n  \"genero\": \"M\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/empleados/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "empleados",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
